@@ -6,7 +6,7 @@ export const SAMPLE_TRACKS: Track[] = [
     title: "Divinity",
     artist: "Porter Robinson",
     bpm: 90,
-    genre: "Electronic",
+    genre: "House",
     energy: 3,
     camelotKey: "10B",
   },
@@ -29,7 +29,7 @@ export const SAMPLE_TRACKS: Track[] = [
     camelotKey: "11B",
   },
   {
-    id: "3",
+    id: "4",
     title: "One Chance",
     artist: "Knock2",
     bpm: 95,
