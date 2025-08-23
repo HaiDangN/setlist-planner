@@ -36,8 +36,39 @@ h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
+.suggested-track {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+.suggested-track__badges {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+}
+.badge {
+  border-radius: 5px;
+  padding: 1px 4px;
+  background-color: black;
+  color: rgb(255, 255, 255);
+}
+.excellent {
+  background-color: #008430;
+}
+.good {
+  background-color: #a8ad00;
+}
+.ok {
+  color: white;
+  background-color: rgb(149, 95, 0);
+}
+.bad {
+  color: white;
+  background-color: rgb(145, 10, 10);
+}
 
 button {
+  display: block;
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;

@@ -31,28 +31,39 @@ function scoreBpm(fromBpm: number, toBpm: number) {
   return 1 - Math.pow(x, BPM_RANGES.p);
 }
 
-function scoreKey(fromKey: CamelotKey, toKey: CamelotKey) {
+export function scoreKey(fromKey: CamelotKey, toKey: CamelotKey) {
   const fromNumber = fromKey.slice(0, -1);
   const fromLetter = fromKey.slice(-1);
 
   const toNumber = toKey.slice(0, -1);
   const toLetter = toKey.slice(-1);
   if (fromKey === toKey) {
-    return 1;
+    return 1; // same key
   } else if (fromNumber === toNumber) {
-    return 0.8;
+    return 0.9; // relative major/minor
   } else if (
     fromLetter === toLetter &&
-    Math.abs(Number(fromNumber) - Number(toNumber)) === 1
+    (Math.abs(Number(fromNumber) - Number(toNumber)) === 1 ||
+      Math.abs(Number(fromNumber) - Number(toNumber)) === 11) // handles wrap
   ) {
-    return 0.7;
+    return 0.8; // neighbor
+  }
+  // else if (
+  //   fromLetter !== toLetter &&
+  //   (Math.abs(Number(fromNumber) - Number(toNumber)) === 1 ||
+  //    Math.abs(Number(fromNumber) - Number(toNumber)) === 11)
+  // ) {
+  //   return 0.5; // relative neighbor
+  // }
+  else if ((Number(fromNumber) - Number(toNumber) + 12) % 12 === 7) {
+    return 0.6; // energy boost (perfect fifth)
   } else {
-    return 0;
+    return 0.2; // default fallback, still mixable with effort
   }
 }
-function scoreGenre(from: string, to: string): number {
-  const f = from.toLowerCase();
-  const t = to.toLowerCase();
+export function scoreGenre(from: string, to: string): number {
+  const f = from.toLowerCase().split(" ").join("");
+  const t = to.toLowerCase().split(" ").join("");
   return GENRE_SIMILARITY[f]?.[t] ?? 0;
 }
 export default function scoreTransition(from: Track, to: Track) {
